@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Product extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'category_id',
+        'barcode',
+        'name',
+        'buy_price',
+        'sell_price',
+        'stock',
+        'min_stock',
+    ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function purchaseDetails(): HasMany
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
+
+    public function saleDetails(): HasMany
+    {
+        return $this->hasMany(SaleDetail::class);
+    }
+
+    public function stockHistories(): HasMany
+    {
+        return $this->hasMany(StockHistory::class);
+    }
+}

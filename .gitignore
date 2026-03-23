@@ -1,0 +1,47 @@
+# Laravel - Core
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/auth.json
+
+# Environment
+.env
+.env.backup
+.env.production
+.env.testing
+
+# Webpack / Build
+npm-debug.log
+yarn-error.log
+yarn.log
+
+# Caching & Logs
+*.log
+/.phpunit.cache
+.phpunit.result.cache
+
+# IDE & OS Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+desktop.ini
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+.phpactor.json
+
+# Vagrant / Virtual Machines
+Homestead.json
+Homestead.yaml
+Vagrantfile
+.vagrant/
+
+# *.sqlite
