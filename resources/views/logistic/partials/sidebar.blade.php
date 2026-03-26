@@ -6,9 +6,9 @@
     <div class="space-y-4 mt-3">
 
         {{-- Menu Produk --}}
-        <a href="{{ route('admin.products.index') }}"
+        <a href="{{ route('logistic.products.index') }}"
            class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white shadow-md
-                  {{ str_contains($currentRoute, 'admin.products')
+                  {{ str_contains($currentRoute, 'logistic.products')
                       ? 'bg-[#045595] cursor-default'
                       : 'bg-gradient-to-r from-[#00A6FF] to-[#045595] hover:bg-[#045595]' }}">
             {{-- Ikon Produk --}}
@@ -20,9 +20,9 @@
         </a>
 
         {{-- Menu Supplier --}}
-        <a href="{{ route('admin.suppliers.index') }}"
+        <a href="{{ route('logistic.suppliers.index') }}"
            class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white shadow-md
-                  {{ str_contains($currentRoute, 'admin.suppliers')
+                  {{ str_contains($currentRoute, 'logistic.suppliers')
                       ? 'bg-[#045595] cursor-default'
                       : 'bg-gradient-to-r from-[#00A6FF] to-[#045595] hover:bg-[#045595]' }}">
             {{-- Ikon Supplier --}}

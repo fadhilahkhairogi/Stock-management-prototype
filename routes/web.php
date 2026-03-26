@@ -10,6 +10,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('logistic/products/report', [ProductController::class, 'stockReport'])->name('logistic.products.report');
 // Admin CRUD
-Route::resource('admin/products', ProductController::class)->names('admin.products');
-Route::resource('admin/suppliers', SupplierController::class)->names('admin.suppliers');
+Route::resource('logistic/products', ProductController::class)->names('logistic.products');
+Route::resource('logistic/suppliers', SupplierController::class)->names('logistic.suppliers');

@@ -18,12 +18,12 @@ class SupplierController extends Controller
 
         $suppliers = $query->latest()->paginate(10)->withQueryString();
 
-        return view('admin.suppliers.index', compact('suppliers'));
+        return view('logistic.suppliers.index', compact('suppliers'));
     }
 
     public function create()
     {
-        return view('admin.suppliers.create');
+        return view('logistic.suppliers.create');
     }
 
     public function store(Request $request)
@@ -36,13 +36,13 @@ class SupplierController extends Controller
 
         Supplier::create($validated);
 
-        return redirect()->route('admin.suppliers.index')
+        return redirect()->route('logistic.suppliers.index')
                          ->with('success', 'Supplier berhasil ditambahkan.');
     }
 
     public function edit(Supplier $supplier)
     {
-        return view('admin.suppliers.edit', compact('supplier'));
+        return view('logistic.suppliers.edit', compact('supplier'));
     }
 
     public function update(Request $request, Supplier $supplier)
@@ -55,7 +55,7 @@ class SupplierController extends Controller
 
         $supplier->update($validated);
 
-        return redirect()->route('admin.suppliers.index')
+        return redirect()->route('logistic.suppliers.index')
                          ->with('success', 'Supplier berhasil diperbarui.');
     }
 
@@ -63,7 +63,7 @@ class SupplierController extends Controller
     {
         $supplier->delete();
 
-        return redirect()->route('admin.suppliers.index')
+        return redirect()->route('logistic.suppliers.index')
                          ->with('success', 'Supplier berhasil dihapus.');
     }
 }

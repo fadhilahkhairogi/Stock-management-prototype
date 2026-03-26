@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('logistic.layout')
 
 @section('title', 'Manajemen Supplier')
 
@@ -14,7 +14,7 @@
 
         <div class="flex justify-between items-center mb-3">
             {{-- Tombol Tambah --}}
-            <a href="{{ route('admin.suppliers.create') }}"
+            <a href="{{ route('logistic.suppliers.create') }}"
                class="flex items-center h-9 gap-2 bg-gradient-to-r from-[#00A6FF] to-[#045595] px-4 py-2 rounded-xl shadow-lg font-semibold text-white hover:bg-[#045595] active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
@@ -23,7 +23,7 @@
             </a>
 
             {{-- Form Pencarian --}}
-            <form method="GET" action="{{ route('admin.suppliers.index') }}">
+            <form method="GET" action="{{ route('logistic.suppliers.index') }}">
                 <div class="flex items-center bg-white opacity-60 h-9 px-4 py-2 rounded-xl shadow-lg w-[322px] overflow-hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-[#464C55] mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
@@ -63,7 +63,7 @@
                         {{-- Aksi --}}
                         <div class="flex justify-center items-center gap-2">
                             {{-- Edit --}}
-                            <a href="{{ route('admin.suppliers.edit', $supplier->id) }}"
+                            <a href="{{ route('logistic.suppliers.edit', $supplier->id) }}"
                                class="border-2 border-[#00FF1A] text-[#00FF1A] hover:bg-[#00FF1A] hover:text-white px-3 py-1 rounded-lg text-xs active:scale-95 font-semibold shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>
@@ -72,7 +72,7 @@
 
                             {{-- Hapus --}}
                             <button type="button"
-                                    @click="showDeleteModal = true; deleteUrl = '{{ route('admin.suppliers.destroy', $supplier->id) }}'; deleteName = '{{ addslashes($supplier->name) }}'"
+                                    @click="showDeleteModal = true; deleteUrl = '{{ route('logistic.suppliers.destroy', $supplier->id) }}'; deleteName = '{{ addslashes($supplier->name) }}'"
                                     class="border-2 border-[#FF0004] text-[#FF0004] hover:bg-[#FF0004] hover:text-white px-3 py-1 rounded-lg text-xs active:scale-95 font-semibold shadow-md cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
@@ -89,10 +89,10 @@
         </div>
 
         {{-- Paginasi --}}
-        @include('admin.partials.pagination', ['paginator' => $suppliers])
+        @include('logistic.partials.pagination', ['paginator' => $suppliers])
     </div>
 
     {{-- Modal Hapus --}}
-    @include('admin.partials.delete-modal')
+    @include('logistic.partials.delete-modal')
 </div>
 @endsection

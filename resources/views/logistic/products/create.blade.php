@@ -1,13 +1,13 @@
-@extends('admin.layout')
+@extends('logistic.layout')
 
-@section('title', 'Edit Produk')
+@section('title', 'Tambah Produk')
 
 @section('content')
 <div class="bg-gradient-to-b from-[#00A6FF] to-[#045595] rounded-r-2xl p-5 shadow-[inset_0px_4px_27px_1.8px_rgba(0,0,0,0.25),0px_4px_13.5px_1.8px_rgba(0,0,0,0.25)]">
 
     {{-- Header --}}
     <div class="flex justify-start items-center mb-6">
-        <h1 class="text-4xl font-extrabold">Edit Produk</h1>
+        <h1 class="text-4xl font-extrabold">Tambah Produk</h1>
     </div>
 
     {{-- Form --}}
@@ -17,28 +17,26 @@
         <div class="pb-6">
             <h2 class="flex items-center gap-1.5 text-2xl text-white rounded-xl shadow-md font-bold px-4 py-2 bg-gradient-to-r from-[#00A6FF] to-[#045595]">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>
+                    <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
                 </svg>
-                Edit Produk
+                Tambah Produk Baru
             </h2>
         </div>
 
-        <form action="{{ route('admin.products.update', $product->id) }}" method="POST">
+        <form action="{{ route('logistic.products.store') }}" method="POST">
             @csrf
-            @method('PUT')
 
             <div class="rounded-2xl shadow-[inset_0px_4px_27px_1.8px_rgba(0,0,0,0.25)] px-6 py-6 space-y-4"
                  x-data="{
                      isCategoryOpen: false,
-                     categoryId: '{{ old('category_id', $product->category_id) }}',
-                     categoryName: '{{ old('category_id', $product->category_id) ? $categories->find(old('category_id', $product->category_id))?->name : '' }}'
+                     categoryId: '{{ old('category_id') }}',
+                     categoryName: '{{ old('category_id') ? $categories->find(old('category_id'))?->name : '' }}'
                  }">
 
                 {{-- Nama Produk --}}
                 <div class="flex flex-col w-full">
                     <label class="text-lg mb-1 font-medium">Nama Produk</label>
-                    <input type="text" name="name" placeholder="Masukkan nama produk"
-                           value="{{ old('name', $product->name) }}"
+                    <input type="text" name="name" placeholder="Masukkan nama produk" value="{{ old('name') }}"
                            class="w-full p-2.5 border border-[#00A6FF] rounded-[13px]" required />
                     @error('name') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                 </div>
@@ -71,8 +69,7 @@
                     {{-- Barcode --}}
                     <div class="flex flex-col w-full">
                         <label class="text-lg mb-1 font-medium">Barcode</label>
-                        <input type="text" name="barcode" placeholder="Masukkan barcode (opsional)"
-                               value="{{ old('barcode', $product->barcode) }}"
+                        <input type="text" name="barcode" placeholder="Masukkan barcode (opsional)" value="{{ old('barcode') }}"
                                class="w-full p-2.5 border border-[#00A6FF] rounded-[13px]" />
                         @error('barcode') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -82,8 +79,7 @@
                     {{-- Harga Beli --}}
                     <div class="flex flex-col w-full">
                         <label class="text-lg mb-1 font-medium">Harga Beli</label>
-                        <input type="number" name="buy_price" placeholder="Masukkan harga beli"
-                               value="{{ old('buy_price', $product->buy_price) }}"
+                        <input type="number" name="buy_price" placeholder="Masukkan harga beli" value="{{ old('buy_price') }}"
                                class="w-full p-2.5 border border-[#00A6FF] rounded-[13px]" required />
                         @error('buy_price') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -91,8 +87,7 @@
                     {{-- Harga Jual --}}
                     <div class="flex flex-col w-full">
                         <label class="text-lg mb-1 font-medium">Harga Jual</label>
-                        <input type="number" name="sell_price" placeholder="Masukkan harga jual"
-                               value="{{ old('sell_price', $product->sell_price) }}"
+                        <input type="number" name="sell_price" placeholder="Masukkan harga jual" value="{{ old('sell_price') }}"
                                class="w-full p-2.5 border border-[#00A6FF] rounded-[13px]" required />
                         @error('sell_price') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -102,8 +97,7 @@
                     {{-- Stok Aktif --}}
                     <div class="flex flex-col w-full">
                         <label class="text-lg mb-1 font-medium">Stok</label>
-                        <input type="number" name="stock" placeholder="Masukkan jumlah stok"
-                               value="{{ old('stock', $product->stock) }}"
+                        <input type="number" name="stock" placeholder="Masukkan jumlah stok" value="{{ old('stock', 0) }}"
                                class="w-full p-2.5 border border-[#00A6FF] rounded-[13px]" required />
                         @error('stock') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -111,8 +105,7 @@
                     {{-- Min Stok --}}
                     <div class="flex flex-col w-full">
                         <label class="text-lg mb-1 font-medium">Minimum Stok</label>
-                        <input type="number" name="min_stock" placeholder="Batas notifikasi stok minimum"
-                               value="{{ old('min_stock', $product->min_stock) }}"
+                        <input type="number" name="min_stock" placeholder="Batas notifikasi stok minimum" value="{{ old('min_stock', 0) }}"
                                class="w-full p-2.5 border border-[#00A6FF] rounded-[13px]" required />
                         @error('min_stock') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -121,7 +114,7 @@
 
             {{-- Tombol Bawah --}}
             <div class="pt-6 flex justify-end gap-3">
-                <a href="{{ route('admin.products.index') }}"
+                <a href="{{ route('logistic.products.index') }}"
                    class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#FF0004] text-white font-semibold hover:bg-[#b90003] active:scale-95 shadow-[inset_0px_4px_27px_1.8px_rgba(0,0,0,0.25),0px_4px_13.5px_1.8px_rgba(0,0,0,0.25)]">
                     ✕ Batal
                 </a>

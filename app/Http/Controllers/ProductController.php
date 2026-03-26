@@ -6,9 +6,28 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductController extends Controller
 {
+    
+    public function stockReport()
+{
+    $products = Product::with('category')->get();
+
+    $totalBuyPrice = $products->sum('buy_price');
+    $totalSellPrice = $products->sum('sell_price');
+    $totalStock = $products->sum('stock');
+        
+    $pdf = PDF::loadView('logistic.products.stock_report', [
+        'products'       => $products,
+        'totalBuyPrice'  => $totalBuyPrice,
+        'totalSellPrice' => $totalSellPrice,
+        'totalStock'     => $totalStock
+    ]);
+        
+    return $pdf->stream('laporan-stock-barang.pdf');
+}
     public function index(Request $request)
     {
         $query = Product::with('category');
@@ -21,7 +40,7 @@ class ProductController extends Controller
         $products = $query->latest()->paginate(10)->withQueryString();
 
         // Cache Dashboard
-        $dashboardData = Cache::remember('admin.products.dashboard.data', 600, function () {
+        $dashboardData = Cache::remember('logistic.products.dashboard.data', 600, function () {
             // Kekurangan Stok
             $lowStockProducts = Product::whereColumn('stock', '<=', 'min_stock')
                                 ->select('name', 'stock', 'min_stock')
@@ -91,13 +110,13 @@ class ProductController extends Controller
                 ->setColors(['#00A6FF', '#045595', '#00FF1A', '#FF0004', '#ffc107', '#9C27B0']);
         }
 
-        return view('admin.products.index', compact('products', 'dashboard'));
+        return view('logistic.products.index', compact('products', 'dashboard'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        return view('logistic.products.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -115,16 +134,16 @@ class ProductController extends Controller
         Product::create($validated);
 
         // Clear Cache
-        Cache::forget('admin.products.dashboard.data');
+        Cache::forget('logistic.products.dashboard.data');
 
-        return redirect()->route('admin.products.index')
+        return redirect()->route('logistic.products.index')
                          ->with('success', 'Produk berhasil ditambahkan.');
     }
 
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        return view('logistic.products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, Product $product)
@@ -142,9 +161,9 @@ class ProductController extends Controller
         $product->update($validated);
 
         // Clear Cache
-        Cache::forget('admin.products.dashboard.data');
+        Cache::forget('logistic.products.dashboard.data');
 
-        return redirect()->route('admin.products.index')
+        return redirect()->route('logistic.products.index')
                          ->with('success', 'Produk berhasil diperbarui.');
     }
 
@@ -153,9 +172,9 @@ class ProductController extends Controller
         $product->delete();
 
         // Clear Cache
-        Cache::forget('admin.products.dashboard.data');
+        Cache::forget('logistic.products.dashboard.data');
 
-        return redirect()->route('admin.products.index')
+        return redirect()->route('logistic.products.index')
                          ->with('success', 'Produk berhasil dihapus.');
     }
 }

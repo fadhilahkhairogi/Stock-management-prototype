@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('logistic.layout')
 
 @section('title', 'Manajemen Produk')
 
@@ -14,7 +14,7 @@
 
         <div class="flex justify-between items-center mb-3">
             {{-- CREATE BUTTON --}}
-            <a href="{{ route('admin.products.create') }}"
+            <a href="{{ route('logistic.products.create') }}"
                class="flex items-center h-9 gap-2 bg-gradient-to-r from-[#00A6FF] to-[#045595] px-4 py-2 rounded-xl shadow-lg font-semibold text-white hover:bg-[#045595] active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
@@ -22,8 +22,16 @@
                 Tambah Produk
             </a>
 
+            <a href="{{ route('logistic.products.report') }}" target = "_blank"
+               class="flex items-center h-9 gap-2 bg-gradient-to-r from-[#00A6FF] to-[#045595] px-4 py-2 rounded-xl shadow-lg font-semibold text-white hover:bg-[#045595] active:scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 640 640">
+                    <path d="M352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 306.7L246.6 265.3C234.1 252.8 213.8 252.8 201.3 265.3C188.8 277.8 188.8 298.1 201.3 310.6L297.3 406.6C309.8 419.1 330.1 419.1 342.6 406.6L438.6 310.6C451.1 298.1 451.1 277.8 438.6 265.3C426.1 252.8 405.8 252.8 393.3 265.3L352 306.7L352 96zM160 384C124.7 384 96 412.7 96 448L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 448C544 412.7 515.3 384 480 384L433.1 384L376.5 440.6C345.3 471.8 294.6 471.8 263.4 440.6L206.9 384L160 384zM464 440C477.3 440 488 450.7 488 464C488 477.3 477.3 488 464 488C450.7 488 440 477.3 440 464C440 450.7 450.7 440 464 440z"/>
+                </svg>
+                Download Laporan Stok
+            </a>
+
             {{-- SEARCH BAR --}}
-            <form method="GET" action="{{ route('admin.products.index') }}">
+            <form method="GET" action="{{ route('logistic.products.index') }}">
                 <div class="flex items-center bg-white opacity-60 h-9 px-4 py-2 rounded-xl shadow-lg w-[322px] overflow-hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-[#464C55] mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
@@ -71,7 +79,7 @@
                         {{-- ACTION BUTTONS --}}
                         <div class="flex justify-center items-center gap-2">
                             {{-- EDIT --}}
-                            <a href="{{ route('admin.products.edit', $product->id) }}"
+                            <a href="{{ route('logistic.products.edit', $product->id) }}"
                                class="border-2 border-[#00FF1A] text-[#00FF1A] hover:bg-[#00FF1A] hover:text-white px-3 py-1 rounded-lg text-xs active:scale-95 font-semibold shadow-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>
@@ -80,7 +88,7 @@
 
                             {{-- DELETE --}}
                             <button type="button"
-                                    @click="showDeleteModal = true; deleteUrl = '{{ route('admin.products.destroy', $product->id) }}'; deleteName = '{{ addslashes($product->name) }}'"
+                                    @click="showDeleteModal = true; deleteUrl = '{{ route('logistic.products.destroy', $product->id) }}'; deleteName = '{{ addslashes($product->name) }}'"
                                     class="border-2 border-[#FF0004] text-[#FF0004] hover:bg-[#FF0004] hover:text-white px-3 py-1 rounded-lg text-xs active:scale-95 font-semibold shadow-md cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
@@ -97,7 +105,7 @@
         </div>
 
         {{-- Paginasi --}}
-        @include('admin.partials.pagination', ['paginator' => $products])
+        @include('logistic.partials.pagination', ['paginator' => $products])
 
         {{-- Dashboard --}}
         <div class="mt-8 pt-6 border-t border-white/20">
@@ -203,7 +211,7 @@
     </div>
 
     {{-- DELETE MODAL --}}
-    @include('admin.partials.delete-modal')
+    @include('logistic.partials.delete-modal')
 </div>
 
 @if($dashboard['pieChart'])

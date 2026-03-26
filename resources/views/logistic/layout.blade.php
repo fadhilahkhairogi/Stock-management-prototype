@@ -59,7 +59,7 @@
 
         <div class="flex">
             {{-- Sidebar --}}
-            @include('admin.partials.sidebar')
+            @include('logistic.partials.sidebar')
 
             {{-- Konten Utama --}}
             <main class="flex-1 pr-5 py-8">
@@ -69,7 +69,7 @@
     </div>
 
     {{-- Alert --}}
-    @include('admin.partials.alert')
+    @include('logistic.partials.alert')
 
     @stack('scripts')
 </body>
