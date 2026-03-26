@@ -1,6 +1,7 @@
 # UMKM Stock Management
 
 Prototype aplikasi manajemen stok berbasis web untuk UMKM, dibangun dengan **Laravel** dan **SQLite**.
+![Screenshot Website](./public/images/preview.png)
 
 ---
 
