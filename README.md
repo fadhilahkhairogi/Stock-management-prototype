@@ -16,14 +16,22 @@ Sebelum memulai, disarankan sudah menginstal **Laravel Herd** di komputer Anda:
 
 ## Cara Menjalankan dari Clone
 
-### 1. Clone Repositori
+### 1. Buka CMD di Folder Herd
+
+Buka Command Prompt (CMD) dan arahkan ke dalam direktori tempat Anda menyimpan _project_ Herd. Contoh:
+
+```cmd
+cd C:\Users\<Username>\Herd
+```
+
+### 2. Clone Repositori
 
 ```bash
 git clone https://github.com/fadhilahkhairogi/Stock-management-prototype umkm-stock
 cd umkm-stock
 ```
 
-### 2. Hentikan Servis Herd Sementara
+### 3. Hentikan Servis Herd Sementara
 
 > Menghindari konflik saat Composer menginstal dependensi.
 
@@ -31,31 +39,31 @@ cd umkm-stock
 herd stop
 ```
 
-### 3. Install Dependensi PHP
+### 4. Install Dependensi PHP
 
 ```bash
 herd composer install
 ```
 
-### 4. Aktifkan Kembali Herd
+### 5. Aktifkan Kembali Herd
 
 ```bash
 herd start
 ```
 
-### 5. Salin File Konfigurasi
+### 6. Salin File Konfigurasi
 
 ```bash
 copy .env.example .env
 ```
 
-### 6. Generate Application Key
+### 7. Generate Application Key
 
 ```bash
 herd php artisan key:generate
 ```
 
-### 7. Buka Aplikasi di Browser
+### 8. Buka Aplikasi di Browser
 
 Karena folder `umkm-stock` berada di dalam direktori yang dipantau Herd, URL sudah otomatis aktif. **Tidak perlu `php artisan serve`.**
 
