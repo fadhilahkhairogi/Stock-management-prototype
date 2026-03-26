@@ -56,13 +56,11 @@
                 </tr>
             @endforeach
             <tr>
-                <td>-</td>
-                <td><b>TOTAL</b></td>
-                <td>-</td>
-                <td>{{ $totalBuyPrice }}</td>
-                <td>{{ $totalSellPrice }}</td>
-                <td>{{ $totalStock }}</td>
-                <td>-</td>
+                <td colspan ="3"><b>TOTAL</b></td>
+                <td><b>{{ $totalBuyPrice }}</b></td>
+                <td><b>{{ $totalSellPrice }}</b></td>
+                <td><b>{{ $totalStock }}</b></td>
+                <td><b>-</b></td>
             </tr>
         </tbody>
     </table>
